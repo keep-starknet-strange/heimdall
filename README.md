@@ -1,7 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/starknet-exploration/heimdall">
-    <!-- Please provide path to your logo here -->
-    <img src="docs/images/logo.svg" alt="Logo" width="100" height="100">
+    <img src="docs/images/heimdall.png" height="200">
   </a>
 </h1>
 
@@ -23,7 +22,6 @@
 [![Project license](https://img.shields.io/github/license/starknet-exploration/heimdall.svg?style=flat-square)](LICENSE)
 
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/starknet-exploration/heimdall/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![code with love by starknet-exploration](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-starknet-exploration-ff1414.svg?style=flat-square)](https://github.com/starknet-exploration)
 
 </div>
 
@@ -40,7 +38,7 @@
 - [Support](#support)
 - [Project assistance](#project-assistance)
 - [Contributing](#contributing)
-- [Authors & contributors](#authors--contributors)
+- [Authors \& contributors](#authors--contributors)
 - [Security](#security)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -129,7 +127,6 @@ Together, we can make Heimdall **better**!
 ## Contributing
 
 First off, thanks for taking the time to contribute! Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make will benefit everybody else and are **greatly appreciated**.
-
 
 Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you for being involved!
 
