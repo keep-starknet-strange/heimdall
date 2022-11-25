@@ -75,12 +75,16 @@
 
 ### Built With
 
+- [Rust](https://www.rust-lang.org/)
+
 > **[?]**
 > Please provide the technologies that are used in the project.
 
 ## Getting Started
 
 ### Prerequisites
+
+- [Rust](https://www.rust-lang.org/tools/install)
 
 > **[?]**
 > What are the project requirements/dependencies?
@@ -95,6 +99,10 @@
 > **[?]**
 > How does one go about using it?
 > Provide various use cases and code examples here.
+
+```sh
+cargo run -- --dir-path ./ comments check-comments
+```
 
 ## Roadmap
 
