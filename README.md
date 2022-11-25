@@ -34,6 +34,8 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
+  - [CLI](#cli)
+  - [Infra](#infra)
 - [Roadmap](#roadmap)
 - [Support](#support)
 - [Project assistance](#project-assistance)
@@ -100,9 +102,15 @@
 > How does one go about using it?
 > Provide various use cases and code examples here.
 
+### CLI
+
 ```sh
 cargo run -- --dir-path ./ comments check-comments
 ```
+
+### Infra
+
+See infra readme [here](infra/README.md)
 
 ## Roadmap
 
