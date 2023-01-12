@@ -17,7 +17,7 @@ pub async fn pull_data() -> Result<HashMap<String, Vec<Interaction>>> {
         ("keep-starknet-strange", "quaireaux"),
         ("sayajin-labs", "kakarot"),
     ];
-    let token = "".to_owned(); //std::env::var("GH_TOKEN").unwrap();
+    let token = std::env::var("GH_TOKEN").unwrap();
     let client = reqwest::Client::builder()
         .user_agent("keep-starknet-strange")
         .build()?;
