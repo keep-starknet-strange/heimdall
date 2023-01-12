@@ -1,0 +1,6 @@
+[workspace]
+members = ["crates/comment-checker", "crates/github-analytics"]
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/keep-starknet-strange/heimdall/"

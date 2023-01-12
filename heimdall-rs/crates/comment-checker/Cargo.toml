@@ -1,0 +1,11 @@
+[package]
+name = "comment-checker"
+version.workspace = true
+edition.workspace = true
+repository.workspace = true
+
+[dependencies]
+clap = { version = "4.0.22", features = ["derive"] }
+comment-parser = "0.1.0"
+eyre = "0.6.8"
+walkdir = "2.3.2"

@@ -1,0 +1,23 @@
+services:
+  influxdb:
+    image: influxdb:1.8.10
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+  grafana:
+    image: grafana/grafana-oss:latest
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./trash/grafana-provisioning/:/etc/grafana/provisioning
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+    depends_on:
+      - influxdb
+volumes:
+  influxdb-storage: 
+  grafana-storage:
