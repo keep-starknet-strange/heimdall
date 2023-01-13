@@ -1,8 +1,7 @@
-use super::{
-    comments::check_comments,
-    model::{Cli, Commands, CommentsSubCommands},
-};
 use clap::Parser;
+
+use super::comments::check_comments;
+use super::model::{Cli, Commands, CommentsSubCommands};
 
 /// Main entry point for the Heimdall CLI.
 pub fn run() {
