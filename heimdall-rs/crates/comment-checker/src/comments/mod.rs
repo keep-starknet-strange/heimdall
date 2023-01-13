@@ -26,7 +26,7 @@ pub fn check_comments(path: &PathBuf) {
         let com = comment.raw().trim();
         if com.starts_with("// ") {
             assert!(
-                com.chars().nth(3).unwrap().is_uppercase() && com.ends_with("."),
+                com.chars().nth(3).unwrap().is_uppercase() && com.ends_with('.'),
                 "{}",
                 format!("Badly formatted comment {:#?}", com)
             )
