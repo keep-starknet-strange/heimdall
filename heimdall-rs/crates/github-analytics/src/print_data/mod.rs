@@ -2,7 +2,25 @@ use std::collections::HashMap;
 
 use crate::models::Interaction;
 
+/// Display the summary of the interactions
+///
+/// # Arguments
+///
+/// * `repo_info` - A HashMap containing the interactions
+///
+/// # Example
+///
+/// ```
+/// use std::collections::HashMap;
+/// use github_analytics::models::Interaction;
+/// use github_analytics::print_data::display_summary;
+///
+/// let mut repo_info: HashMap<String, Vec<Interaction>> = HashMap::new();
+/// repo_info.insert("repo".to_owned(), vec![]);
+/// display_summary(&repo_info);
+/// ```
 pub fn display_summary(repo_info: &HashMap<String, Vec<Interaction>>) {
+    // Create the header of the table.
     let mut lines: Vec<Vec<String>> = vec![vec![
         "Repo".to_owned(),
         "PRs opened".to_owned(),
@@ -10,6 +28,7 @@ pub fn display_summary(repo_info: &HashMap<String, Vec<Interaction>>) {
         "Issues opened".to_owned(),
         "Issues closed".to_owned(),
     ]];
+    // Count the different interactions for each repo.
     repo_info.into_iter().for_each(|(repo, interactions)| {
         let mut issues_opened = 0;
         let mut issues_closed = 0;
@@ -37,6 +56,8 @@ pub fn display_summary(repo_info: &HashMap<String, Vec<Interaction>>) {
         );
     });
     let mut out = Vec::new();
+    // Format the table.
     text_tables::render(&mut out, lines).unwrap();
+    // Print the table.
     println!("{}", std::str::from_utf8(&out).unwrap());
 }
