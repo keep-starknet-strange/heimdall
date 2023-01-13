@@ -12,6 +12,7 @@ use crate::models::Interaction;
 ///
 /// ```
 /// use std::collections::HashMap;
+///
 /// use github_analytics::models::Interaction;
 /// use github_analytics::print_data::display_summary;
 ///

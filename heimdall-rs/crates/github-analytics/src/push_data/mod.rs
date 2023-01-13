@@ -1,7 +1,9 @@
-use crate::models::Interaction;
+use std::collections::HashMap;
+
 use eyre::Result;
 use influxdb::{Client, InfluxDbWriteable, WriteQuery};
-use std::collections::HashMap;
+
+use crate::models::Interaction;
 
 /// Push the data to the influxdb database.
 ///

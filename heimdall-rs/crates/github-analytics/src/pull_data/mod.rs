@@ -1,10 +1,11 @@
-use crate::api::*;
-use crate::models::*;
-use chrono::NaiveDateTime;
-use chrono::Utc;
+use std::collections::HashMap;
+
+use chrono::{NaiveDateTime, Utc};
 use eyre::{eyre, Result};
 use serde_json::Value;
-use std::collections::HashMap;
+
+use crate::api::*;
+use crate::models::*;
 
 /// Fetch the data from the github api.
 ///
@@ -33,9 +34,7 @@ pub async fn pull_data(start: u64) -> Result<HashMap<String, Vec<Interaction>>> 
     // Github token.
     let token = std::env::var("GH_TOKEN").unwrap();
     // Reqwest client.
-    let client = reqwest::Client::builder()
-        .user_agent("keep-starknet-strange")
-        .build()?;
+    let client = reqwest::Client::builder().user_agent("keep-starknet-strange").build()?;
     // HashMap that will contain the interactions.
     let mut repos_info: HashMap<String, Vec<Interaction>> = HashMap::new();
     for (owner, repo) in repos {
@@ -92,18 +91,12 @@ fn parse_interaction(
     for interaction in interactions {
         // Parse the created_at date.
         let created_at = chrono::NaiveDateTime::parse_from_str(
-            interaction["createdAt"]
-                .as_str()
-                .ok_or(eyre!("Could not parse created_at"))?,
+            interaction["createdAt"].as_str().ok_or(eyre!("Could not parse created_at"))?,
             "%Y-%m-%dT%H:%M:%SZ",
         )?;
 
         // Parse the closed_at date.
-        let ended = if interaction_type == "pr" {
-            "mergedAt"
-        } else {
-            "closedAt"
-        };
+        let ended = if interaction_type == "pr" { "mergedAt" } else { "closedAt" };
         // If the interaction is closed, parse the closed_at date.
         let closed_at: Option<NaiveDateTime> = interaction[ended].as_str().map(|closed_at| {
             chrono::NaiveDateTime::parse_from_str(closed_at, "%Y-%m-%dT%H:%M:%SZ").unwrap()
@@ -113,11 +106,13 @@ fn parse_interaction(
         // Declare the interaction type variable.
         let mut inter = interaction_type.clone();
 
-        // If the interaction was created in the desired timeframe add created to the interaction type.
+        // If the interaction was created in the desired timeframe add created to the interaction
+        // type.
         if created_at.ge(start) && created_at.lt(end) {
             time = created_at.and_local_timezone(Utc).unwrap();
             inter += " created";
-            // If the interaction was closed in the desired timeframe add ended to the interaction type.
+            // If the interaction was closed in the desired timeframe add ended to the interaction
+            // type.
         } else if closed_at.is_some()
             && (closed_at.unwrap().ge(start) && closed_at.unwrap().lt(end))
         {
@@ -128,9 +123,8 @@ fn parse_interaction(
             break;
         }
         // Parse the author.
-        let author = interaction["author"]["login"]
-            .as_str()
-            .ok_or(eyre!("Could not parse author"))?;
+        let author =
+            interaction["author"]["login"].as_str().ok_or(eyre!("Could not parse author"))?;
         // Push the interaction to the vector.
         target.push(Interaction {
             time,
