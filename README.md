@@ -33,6 +33,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+    - [GitHub analytics](#github-analytics)
 - [Usage](#usage)
   - [CLI](#cli)
   - [Infra](#infra)
@@ -93,19 +94,22 @@
 
 ### Installation
 
-> **[?]**
-> Describe how to install and get started with the project.
+#### GitHub analytics
+
+```sh
+curl -sL https://raw.githubusercontent.com/keep-starknet-strange/heimdall/main/heimdall-rs/installers/githup | sh
+```
 
 ## Usage
-
-> **[?]**
-> How does one go about using it?
-> Provide various use cases and code examples here.
 
 ### CLI
 
 ```sh
 cargo run -- --dir-path ./ comments check-comments
+```
+
+```sh
+github-analytics 7 --print
 ```
 
 ### Infra
