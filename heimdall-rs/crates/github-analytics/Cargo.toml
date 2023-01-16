@@ -1,5 +1,7 @@
 [package]
 name = "github-analytics"
+description = "This small tool will report/save the PRs and issues opened on the StarkWare exploration team's repos"
+license = "MIT"
 version.workspace = true
 edition.workspace = true
 repository.workspace = true
