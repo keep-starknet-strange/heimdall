@@ -29,6 +29,7 @@ pub async fn pull_data(start: u64) -> Result<HashMap<String, Vec<Interaction>>> 
         ("keep-starknet-strange", "beerus"),
         ("keep-starknet-strange", "garaga"),
         ("keep-starknet-strange", "quaireaux"),
+        ("keep-starknet-strange", "poseidon-rs"),
         ("sayajin-labs", "kakarot"),
     ];
     // Github token.
