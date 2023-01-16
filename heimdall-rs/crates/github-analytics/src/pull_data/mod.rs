@@ -32,9 +32,11 @@ pub async fn pull_data(start: u64) -> Result<HashMap<String, Vec<Interaction>>> 
         ("sayajin-labs", "kakarot"),
     ];
     // Github token.
-    let token = std::env::var("GH_TOKEN").unwrap();
+    let token = std::env::var("GH_TOKEN").expect("Environment variable GH_TOKEN is not set");
     // Reqwest client.
-    let client = reqwest::Client::builder().user_agent("keep-starknet-strange").build()?;
+    let client = reqwest::Client::builder()
+        .user_agent("keep-starknet-strange")
+        .build()?;
     // HashMap that will contain the interactions.
     let mut repos_info: HashMap<String, Vec<Interaction>> = HashMap::new();
     for (owner, repo) in repos {
@@ -91,12 +93,18 @@ fn parse_interaction(
     for interaction in interactions {
         // Parse the created_at date.
         let created_at = chrono::NaiveDateTime::parse_from_str(
-            interaction["createdAt"].as_str().ok_or(eyre!("Could not parse created_at"))?,
+            interaction["createdAt"]
+                .as_str()
+                .ok_or(eyre!("Could not parse created_at"))?,
             "%Y-%m-%dT%H:%M:%SZ",
         )?;
 
         // Parse the closed_at date.
-        let ended = if interaction_type == "pr" { "mergedAt" } else { "closedAt" };
+        let ended = if interaction_type == "pr" {
+            "mergedAt"
+        } else {
+            "closedAt"
+        };
         // If the interaction is closed, parse the closed_at date.
         let closed_at: Option<NaiveDateTime> = interaction[ended].as_str().map(|closed_at| {
             chrono::NaiveDateTime::parse_from_str(closed_at, "%Y-%m-%dT%H:%M:%SZ").unwrap()
@@ -123,8 +131,9 @@ fn parse_interaction(
             break;
         }
         // Parse the author.
-        let author =
-            interaction["author"]["login"].as_str().ok_or(eyre!("Could not parse author"))?;
+        let author = interaction["author"]["login"]
+            .as_str()
+            .ok_or(eyre!("Could not parse author"))?;
         // Push the interaction to the vector.
         target.push(Interaction {
             time,

@@ -14,9 +14,12 @@ pub struct Interaction {
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 pub struct Cli {
+    /// Should print the summary.
     #[clap(long, short, action)]
     pub print: bool,
+    /// Should save the data in an influxdb instance.
     #[clap(long, short, action)]
     pub db: bool,
+    /// Number of days in the past the data analysis should start.
     pub start: u64,
 }
