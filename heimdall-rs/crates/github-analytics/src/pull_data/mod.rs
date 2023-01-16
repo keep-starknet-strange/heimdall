@@ -26,11 +26,11 @@ pub async fn pull_data(start: u64) -> Result<HashMap<String, Vec<Interaction>>> 
         .ok_or(eyre!("Could not create the start date"))?;
     // Repositories to fetch the data from.
     let repos = vec![
+        ("sayajin-labs", "kakarot"),
         ("keep-starknet-strange", "beerus"),
         ("keep-starknet-strange", "garaga"),
         ("keep-starknet-strange", "quaireaux"),
         ("keep-starknet-strange", "poseidon-rs"),
-        ("sayajin-labs", "kakarot"),
     ];
     // Github token.
     let token = std::env::var("GH_TOKEN").expect("Environment variable GH_TOKEN is not set");
