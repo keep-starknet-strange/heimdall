@@ -1,0 +1,36 @@
+---
+name: Report
+
+on:
+  schedule:
+    - cron: "0 0 * * MON"
+  workflow_dispatch:
+
+jobs:
+  report:
+    name: KSS Github Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Heimdall-rs
+        uses: actions/checkout@v3
+      
+      - name: Setup Env
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+        uses: actions-rs/cargo@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Get Date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      
+      - name: Generate Report
+        run: cd heimdall-rs && cargo run --bin github-analytics 7 --print > kss-report-${{ steps.date.outputs.date }}.csv
+        
+      - name: Archive Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: kss-report-${{ steps.date.outputs.date }}.csv
+          path: reports/kss-report-${{ steps.date.outputs.date }}.csv
