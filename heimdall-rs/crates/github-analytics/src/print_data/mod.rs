@@ -1,4 +1,7 @@
+use std::fs::OpenOptions;
 use std::collections::HashMap;
+use csv::Writer;
+use chrono::Utc;
 
 use crate::models::Interaction;
 
@@ -20,7 +23,7 @@ use crate::models::Interaction;
 /// repo_info.insert("repo".to_owned(), vec![]);
 /// display_summary(&repo_info);
 /// ```
-pub fn display_summary(repo_info: &HashMap<String, Vec<Interaction>>) {
+pub fn display_summary(repo_info: &HashMap<String, Vec<Interaction>>, csv: bool) {
     // Create the header of the table.
     let mut lines: Vec<Vec<String>> = vec![vec![
         "Repo".to_owned(),
@@ -56,9 +59,26 @@ pub fn display_summary(repo_info: &HashMap<String, Vec<Interaction>>) {
             .to_vec(),
         );
     });
-    let mut out = Vec::new();
-    // Format the table.
-    text_tables::render(&mut out, lines).unwrap();
-    // Print the table.
-    println!("{}", std::str::from_utf8(&out).unwrap());
+    if csv {
+        let now = Utc::now();
+        let file_name = format!("kss-report-{}.csv", now.format("%Y-%m-%d"));
+
+        let file = OpenOptions::new()
+            .write(true)
+            .create(true)
+            .open(file_name)
+            .unwrap();
+
+        let mut wtr = Writer::from_writer(file);
+
+        lines
+            .into_iter()
+            .for_each(|line| wtr.serialize(line).unwrap());
+    } else {
+        let mut out = Vec::new();
+        // Format the table.
+        text_tables::render(&mut out, lines).unwrap();
+        // Print the table.
+        println!("{}", std::str::from_utf8(&out).unwrap());
+    }
 }

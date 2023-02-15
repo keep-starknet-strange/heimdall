@@ -12,6 +12,6 @@ async fn main() {
         push_data(&repo_infos).await.unwrap();
     }
     if cli.print {
-        display_summary(&repo_infos);
+        display_summary(&repo_infos, cli.csv);
     }
 }

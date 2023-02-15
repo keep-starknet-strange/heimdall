@@ -17,6 +17,9 @@ pub struct Cli {
     /// Should print the summary.
     #[clap(long, short, action)]
     pub print: bool,
+    /// Should ouput to a csv file.
+    #[clap(long, short, action)]
+    pub csv: bool,
     /// Should save the data in an influxdb instance.
     #[clap(long, short, action)]
     pub db: bool,

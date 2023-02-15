@@ -31,11 +31,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd heimdall-rs
-          cargo run --bin github-analytics 7 --csv
+          cargo run --bin github-analytics 7 --print --csv
           mv kss-report-${{ env.TIME }}.csv ../
 
       - name: Archive Report
         uses: actions/upload-artifact@v3
         with:
-          name: kss-report-${{ env.TIME }}
+          name: kss-reports
           path: kss-report-${{ env.TIME }}.csv
